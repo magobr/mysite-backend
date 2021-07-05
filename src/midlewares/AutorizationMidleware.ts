@@ -8,18 +8,33 @@ interface Request extends express.Request {
 class Auto{
     
     LevelAdmin(req: Request, res: express.Response, next: express.NextFunction){
-        if (req.user.user_type === UserType.Admin)
-            next()
+        if (req.user.user_type !== UserType.Admin){
+            return res.status(203).json({
+                error: true,
+                message: "Not authorized"
+            });
+        } 
+        next()  
     }
 
-    LevelUser(req: Request, res: express.Response, next: express.NextFunction){
-        if (req.user.user_type === UserType.User)
-            next()
+    LevelWriter(req: Request, res: express.Response, next: express.NextFunction){
+        if (req.user.user_type !== UserType.Writer){
+            return res.status(203).json({
+                error: true,
+                message: "Not authorized"
+            });
+        }
+        next()
     }
 
     LevelReader(req: Request, res: express.Response, next: express.NextFunction){
-        if(req.user.user_type === UserType.Reader)
-            next()
+        if(req.user.user_type !== UserType.Reader){
+            return res.status(203).json({
+                error: true,
+                message: "Not authorized"
+            });
+        }
+        next()
     }
 }
 
