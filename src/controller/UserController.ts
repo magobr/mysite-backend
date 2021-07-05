@@ -37,14 +37,14 @@ class UserController {
   
       UserModel.create(userInterface, (err) => {
         if(err) return Response.status(400).json({
-            error: true,
-            message: "Erro ao tentar inserir usuário no MongoDB"
-          })
+          error: true,
+          message: "Erro ao tentar inserir usuário no MongoDB"
+        })
   
-          return Response.status(200).json({
-            error: false,
-            message: "Usuário Cadastrado com sucesso"
-          })
+        return Response.status(200).json({
+          error: false,
+          message: "Usuário Cadastrado com sucesso"
+        })
       })
     }
 }
