@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { UserModel } from "../model/UserModel";
 import * as yup from "yup";
 import * as bcrypt from "bcryptjs";
+import { User } from "../interface/UserInterface";
  
 class UserController {
     async store(Request: Request, Response: Response) {
@@ -28,12 +29,13 @@ class UserController {
         })
       }
       
-      const { frist_name, last_name, email, password } = Request.body;      
-      const data = { frist_name, last_name, email, password };
+      const { frist_name, last_name, email, password, user_type } = Request.body;      
+
+      const userInterface: User= { frist_name, last_name, email, password, user_type };
   
-      data.password = await bcrypt.hash(data.password, 8);
+      userInterface.password = await bcrypt.hash(userInterface.password.toString(), 8);
   
-      UserModel.create(data, (err) => {
+      UserModel.create(userInterface, (err) => {
         if(err) return Response.status(400).json({
             error: true,
             message: "Erro ao tentar inserir usuário no MongoDB"

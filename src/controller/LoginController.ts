@@ -34,7 +34,10 @@ class LoginController {
                 email: userExist.email
             },
             token: jwt.sign(
-                {id: userExist._id}, 
+                {
+                    id: userExist._id,
+                    user_type: userExist.user_type
+                }, 
                 authConfig.secret, 
                 {expiresIn: authConfig.expireIn} 
             )
