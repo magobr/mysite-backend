@@ -3,7 +3,7 @@ import * as jwt from "jsonwebtoken";
 import { authConfig } from "../config/auth";
 
 interface Request extends express.Request {
-  user_id: any
+  user?: any
 }
 
 async function AuthMidleware (req: Request, res: express.Response, next: express.NextFunction) {
@@ -22,7 +22,7 @@ async function AuthMidleware (req: Request, res: express.Response, next: express
   
   try {    
     const decoded = JSON.stringify(jwt.verify(token, authConfig.secret));
-    const resultDecoded = JSON.parse(decoded)
+    const resultDecoded = JSON.parse(decoded);
 
     if(!decoded){
       return res.status(401).json({
@@ -31,8 +31,8 @@ async function AuthMidleware (req: Request, res: express.Response, next: express
         message: "O token está expirado!"
       })
     } else {
-        req.user_id = resultDecoded.id;
-        next();
+      req.user = resultDecoded;
+      next();
     }
     
   } catch {
@@ -43,8 +43,5 @@ async function AuthMidleware (req: Request, res: express.Response, next: express
     })
   }
 }
-
-
-
 
 export {AuthMidleware}
