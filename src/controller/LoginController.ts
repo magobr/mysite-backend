@@ -31,12 +31,16 @@ class LoginController {
             user: {
                 _id: userExist._id,
                 name: userExist.frist_name,
+                last_name: userExist.last_name,
                 email: userExist.email
             },
             token: jwt.sign(
                 {
-                    id: userExist._id,
-                    user_type: userExist.user_type
+                    _id: userExist._id,
+                    user_type: userExist.user_type,
+                    frist_name: userExist.frist_name,
+                    last_name: userExist.last_name,
+                    email: userExist.email,
                 }, 
                 authConfig.secret, 
                 {expiresIn: authConfig.expireIn} 

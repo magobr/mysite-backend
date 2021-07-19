@@ -10,7 +10,7 @@ const News = new Schema(
             last_name: { type: String, required: true },
             email : { type: String, required: true },
         },
-        News: {
+        news: {
             headline: { type: String, required: true },
             caption: { type: String, required: true },
             bodyNews: { type: String, required: true },
