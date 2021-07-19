@@ -25,7 +25,7 @@ class UserController {
       if(userExist) {
         return Response.status(400).json({
           error: true,
-          message: "Este usuário já existe!"
+          message: "This user already exists!"
         })
       }
       

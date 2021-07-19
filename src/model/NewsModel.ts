@@ -14,6 +14,9 @@ const News = new Schema(
             headline: { type: String, required: true },
             caption: { type: String, required: true },
             bodyNews: { type: String, required: true },
+            category:{
+                category_name: { type: String }
+            },
             image: { type: Buffer }
         }
     },
