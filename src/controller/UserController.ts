@@ -86,13 +86,13 @@ class UserController {
 
     if(!result){
       return Response.status(404).json({
-        error: false,
+        error: true,
         message: "The user does not exist"
       });
     }
 
     return Response.status(200).json({
-      error: true,
+      error: false,
       message: "User removed successfully!",
       result: result
     });
@@ -109,13 +109,13 @@ class UserController {
 
     if(!result){
       return Response.status(404).json({
-        error: false,
+        error: true,
         message: "The user does not exist"
       });
     }
 
     return Response.status(200).json({
-      error: true,
+      error: false,
       message: "User updated successfully!",
       result: result
     });
