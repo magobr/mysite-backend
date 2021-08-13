@@ -1,5 +1,8 @@
+import * as dotenv from 'dotenv';
+dotenv.config({ path: __dirname + '/../../.env' });
+
 const authConfig =  {
-    secret: "ee75c5c4098e2cc49a76e9571b4725f3895179489c641890172debb3d7806310",
+    secret: process.env.AUTH_SECRET,
     expireIn: "6h"
 }
 

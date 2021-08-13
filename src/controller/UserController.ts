@@ -1,11 +1,15 @@
-import { Request, Response } from 'express';
+import * as express from 'express';
 import { UserModel } from "../model/UserModel";
 import * as yup from "yup";
 import * as bcrypt from "bcryptjs";
 import { User } from "../interface/UserInterface";
+
+interface Request extends express.Request {
+  user?: any
+}
  
 class UserController {
-  async store(Request: Request, Response: Response) {
+  async store(Request: Request, Response: express.Response, next: express.NextFunction) {
 
     let schema = yup.object().shape({
         last_name: yup.string().required(),
@@ -31,7 +35,7 @@ class UserController {
     
     const { frist_name, last_name, email, password, user_type } = Request.body;      
 
-    const userInterface: User= { frist_name, last_name, email, password, user_type };
+    const userInterface: User = { frist_name, last_name, email, password, user_type };
 
     userInterface.password = await bcrypt.hash(userInterface.password.toString(), 8);
 
@@ -48,7 +52,7 @@ class UserController {
     })
   }
 
-  async find(Request: Request, Response: Response){
+  async find(Request: Request, Response: express.Response, next: express.NextFunction){
 
     let users = "";
     if (!Request.params.id) {
@@ -66,6 +70,57 @@ class UserController {
 
     return Response.status(200).json(users);
   }
+
+  async del(Request: Request, Response: express.Response, next: express.NextFunction){
+    const userId = Request.params.id;
+    const loggedUser =  Request.user;
+
+    if (loggedUser._id === userId) {
+      return Response.status(200).json({
+        error: true,
+        message: "can't be excluded"
+      });
+    }
+    
+    let result = await UserModel.findOneAndRemove({_id: userId});
+
+    if(!result){
+      return Response.status(404).json({
+        error: true,
+        message: "The user does not exist"
+      });
+    }
+
+    return Response.status(200).json({
+      error: false,
+      message: "User removed successfully!",
+      result: result
+    });
+  }
+
+  async update(Request: Request, Response: express.Response, next: express.NextFunction){
+    const userId = Request.params.id;
+    const { frist_name, last_name, email, password, user_type } = Request.body;
+
+    const userInterface: User = { frist_name, last_name, email, password, user_type };
+    userInterface.password = await bcrypt.hash(userInterface.password.toString(), 8);
+
+    let result = await UserModel.findOneAndReplace({_id: userId}, userInterface);
+
+    if(!result){
+      return Response.status(404).json({
+        error: true,
+        message: "The user does not exist"
+      });
+    }
+
+    return Response.status(200).json({
+      error: false,
+      message: "User updated successfully!",
+      result: result
+    });
+  }
+
 }
 
 export { UserController }
