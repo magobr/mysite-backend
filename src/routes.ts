@@ -22,4 +22,9 @@ route.post("/user", AuthMidleware, Autorization.LevelAdmin,  User.store)
 route.post("/news/create", AuthMidleware, Autorization.LevelWriter, News.store);
 
 route.post("/news/categories", AuthMidleware, Autorization.LevelAdmin, Categories.store);
+
+route.get("/user", AuthMidleware, Autorization.LevelAdmin,  User.find);
+
+route.get("/user/:id", AuthMidleware, Autorization.LevelAdmin,  User.find);
+
 export { route }

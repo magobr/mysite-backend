@@ -1,4 +1,5 @@
 import { UserType } from "../enums/UserEnum";
+import { Categories } from "./Categories";
 
 export interface News {
     author: {
@@ -11,6 +12,7 @@ export interface News {
         headline: String,
         caption: String,
         bodyNews: String,
+        category: Categories,
         image: Buffer
     }
 }
