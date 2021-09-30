@@ -48,6 +48,16 @@ class LoginController {
         })
     }
 
+    async logout(req: Request, res: Response){
+        let auth = req.headers.authorization
+        if (auth){
+            auth = null,
+            res.status(200).send(
+                auth
+            );
+        } 
+    }
+
 }
 
 export { LoginController }

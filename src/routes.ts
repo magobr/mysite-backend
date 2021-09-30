@@ -16,6 +16,7 @@ const Login = new LoginController;
 const Categories = new CategoriesController;
 
 route.post("/login", Login.login);
+route.get("/logout", Login.logout);
 // User
 route.post("/user", AuthMidleware, Autorization.LevelAdmin,  User.store)
 route.get("/user", AuthMidleware, Autorization.LevelAdmin,  User.find);
