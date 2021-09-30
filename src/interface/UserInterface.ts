@@ -1,8 +1,10 @@
-import { UserType } from "../enums/UserEnum";
+import { UserType, UserStatus } from "../enums/UserEnum";
 export interface User {
-    frist_name: String,
-    last_name: String,
-    email: String,
-    password: String,
-    user_type: UserType
+    _id: string,
+    frist_name: string,
+    last_name: string,
+    email: string,
+    password: string,
+    user_type: UserType,
+    user_status: UserStatus
 }

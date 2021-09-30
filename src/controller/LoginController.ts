@@ -3,18 +3,27 @@ import { UserModel } from "../model/UserModel";
 import * as bcrypt from "bcryptjs";
 import * as jwt from "jsonwebtoken";
 import { authConfig } from "../config/auth";
+import { User } from "../interface/UserInterface"
+import { UserStatus } from "../enums/UserEnum"
 
 class LoginController {
 
     async login(req: Request, res: Response){
         const { email, password } = req.body;
 
-        const userExist = await UserModel.findOne({ email, })
+        const userExist: User = await UserModel.findOne({ email, })
 
         if (!userExist){
             return res.status(400).json({
                 error: true,
                 message: "User does not exist"
+            })
+        }
+
+        if (userExist.user_status === UserStatus.Disabled) {
+            return res.status(200).json({
+                error: true,
+                message: "User is disabled"
             })
         }
 
