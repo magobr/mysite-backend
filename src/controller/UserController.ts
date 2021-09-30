@@ -27,7 +27,7 @@ class UserController {
 
     let userExist = await UserModel.findOne({ email: Request.body.email });
     if(userExist) {
-      return Response.status(400).json({
+      return Response.status(226).json({
         error: true,
         message: "This user already exists!"
       })
