@@ -33,9 +33,10 @@ class UserController {
       })
     }
     
-    const { frist_name, last_name, email, password, user_type } = Request.body;      
+    const { frist_name, last_name, email, password, user_type, user_status } = Request.body;   
+    const _id =  userExist._id; 
 
-    const userInterface: User = { frist_name, last_name, email, password, user_type };
+    const userInterface: User = { _id, frist_name, last_name, email, password, user_type, user_status };
 
     userInterface.password = await bcrypt.hash(userInterface.password.toString(), 8);
 
@@ -100,9 +101,12 @@ class UserController {
 
   async update(Request: Request, Response: express.Response, next: express.NextFunction){
     const userId = Request.params.id;
-    const { frist_name, last_name, email, password, user_type } = Request.body;
+    const { frist_name, last_name, email, password, user_type, user_status } = Request.body;
 
-    const userInterface: User = { frist_name, last_name, email, password, user_type };
+    const userInterface: User = {
+      frist_name, last_name, email, password, user_type, user_status,
+      _id: ''
+    };
     userInterface.password = await bcrypt.hash(userInterface.password.toString(), 8);
 
     let result = await UserModel.findOneAndReplace({_id: userId}, userInterface);

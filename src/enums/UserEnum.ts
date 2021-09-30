@@ -3,3 +3,8 @@ export enum UserType{
     Admin = "ADMIN",
     Reader = "READER"
 }
+
+export enum UserStatus{
+    Active = "ACTIVE",
+    Disabled = "DISABLE"
+}
