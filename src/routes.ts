@@ -23,6 +23,7 @@ route.get("/user", AuthMidleware, Autorization.LevelAdmin,  User.find);
 route.get("/user/:id", AuthMidleware, Autorization.LevelAdmin,  User.find);
 route.delete("/user/:id", AuthMidleware, Autorization.LevelAdmin,  User.del);
 route.put("/user/:id", AuthMidleware, Autorization.LevelAdmin,  User.update);
+route.get("/user/get/type", AuthMidleware, Autorization.LevelAdmin, User.getUserType);
 // News
 route.post("/news/create", AuthMidleware, Autorization.LevelWriter, News.store);
 route.post("/news/categories", AuthMidleware, Autorization.LevelAdmin, Categories.store);
