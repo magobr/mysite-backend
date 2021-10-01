@@ -1,5 +1,7 @@
 import * as mongoose from "mongoose";
 
+import { Categories } from "../interface/Categories";
+
 const Schema = mongoose.Schema;
 
 const Categories = new Schema(
@@ -13,6 +15,6 @@ const Categories = new Schema(
     }
 )
 
-const CategoriesModel = mongoose.model('categories', Categories)
+const CategoriesModel = mongoose.model<Categories>('categories', Categories)
 
 export { CategoriesModel }

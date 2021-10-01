@@ -11,7 +11,7 @@ class LoginController {
     async login(req: Request, res: Response){
         const { email, password } = req.body;
 
-        const userExist: User = await UserModel.findOne({ email, })
+        const userExist = await UserModel.findOne({ email, })
 
         if (!userExist){
             return res.status(400).json({
@@ -60,7 +60,7 @@ class LoginController {
     async logout(req: Request, res: Response){
         let auth = req.headers.authorization
         if (auth){
-            auth = null,
+            auth = '',
             res.status(200).send(
                 auth
             );

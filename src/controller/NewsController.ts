@@ -1,7 +1,6 @@
 import * as express from "express";
 import { NewsModel } from "../model/NewsModel";
 import { CategoriesModel } from "../model/CategoriesModel";
-import { News } from "../interface/NewsInterface";
 
 interface Request extends express.Request {
     user?: any
@@ -31,7 +30,7 @@ class NewsController{
         
         let author = req.user
         
-        const newsInterface: News = { author, news }
+        const newsInterface = { author, news }
 
         NewsModel.create(newsInterface, (err)=>{
             if(err) return res.status(400).json({
@@ -49,7 +48,7 @@ class NewsController{
 
     async find(req: Request, res: express.Response, next: express.NextFunction){
 
-        let news = "";
+        let news;
         if (!req.params.id) {
             news = await NewsModel.find({});  
         } else {
@@ -107,7 +106,7 @@ class NewsController{
         }
         
         const author = authorOfNews.author;
-        const newsInterface: News = { author, news }
+        const newsInterface = { author, news }
 
         let result = await NewsModel.findOneAndReplace({_id: newsId}, newsInterface);
     
