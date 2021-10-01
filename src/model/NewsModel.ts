@@ -1,4 +1,5 @@
 import * as mongoose from "mongoose";
+import { News } from "../interface/NewsInterface";
 
 const Schema = mongoose.Schema;
 
@@ -25,6 +26,6 @@ const News = new Schema(
     }
 )
 
-const NewsModel = mongoose.model('news', News)
+const NewsModel = mongoose.model<News>('news', News)
 
 export { NewsModel }

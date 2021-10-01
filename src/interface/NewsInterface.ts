@@ -1,7 +1,8 @@
+import { Document } from "mongoose";
 import { UserType } from "../enums/UserEnum";
 import { Categories } from "./Categories";
 
-export interface News {
+export interface News extends Document{
     author: {
         frist_name: String,
         last_name: String,
