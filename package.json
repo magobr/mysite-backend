@@ -6,7 +6,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
-    "start": ""
+    "start": "node build/index.js",
+    "build": "tsc",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "@types/express-serve-static-core": "^4.17.22",
