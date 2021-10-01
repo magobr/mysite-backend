@@ -17,7 +17,7 @@ class CategoriesController{
         }
 
         let { category } = req.body;
-        const categoryInterface: Categories = { category }
+        const categoryInterface = { category }
 
         CategoriesModel.create(categoryInterface, (err)=>{
             if(err) return res.status(400).json({
