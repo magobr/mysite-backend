@@ -31,7 +31,7 @@ class App {
     }
 
     runningServer(port: number, callback: Function){
-        app.listen(port, callback());
+        app.listen(process.env.PORT || port, callback());
     }
 
 }
