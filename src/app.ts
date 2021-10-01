@@ -1,6 +1,6 @@
 // import 'reflect-metadata';
-import * as express from 'express';
-import * as cors from "cors";
+import express from 'express';
+import cors from "cors";
 require("./config/connection");
 // import createConnection from './database';
 import { route } from './routes'; 
@@ -16,7 +16,7 @@ class App {
     middlewares(){
         app.use(express.json());
         
-        app.use((req, res, next) => {
+        app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
             res.header("Access-Control-Allow-Origin", "*");
             res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
             res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
