@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import { connect } from 'mongoose';
 import * as dotenv from 'dotenv';
 dotenv.config({ path: __dirname + '/../../.env' });
 
@@ -8,7 +8,7 @@ class Database{
     }
 
     async mongoCreateConn(){
-        await mongoose.connect(process.env.DB_CONNECTION, {
+        await connect(process.env.DB_CONNECTION, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useFindAndModify: false,
