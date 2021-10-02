@@ -15,9 +15,7 @@ class CategoriesController{
             });
         }
 
-        let { category } = req.body;
-
-        CategoriesModel.create(category, (err: any)=>{
+        CategoriesModel.create(req.body, (err: any)=>{
             if(err) return res.status(400).json({
                 error: true,
                 message: "Error registering Category"
