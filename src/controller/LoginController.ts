@@ -3,7 +3,6 @@ import { UserModel } from "../model/UserModel";
 import * as bcrypt from "bcryptjs";
 import * as jwt from "jsonwebtoken";
 import { authConfig } from "../config/auth";
-import { User } from "../interface/UserInterface"
 import { UserStatus } from "../enums/UserEnum"
 
 class LoginController {
@@ -23,6 +22,7 @@ class LoginController {
         if (userExist.user_status === UserStatus.Disabled) {
             return res.status(200).json({
                 error: true,
+                user_status: userExist.user_status,
                 message: "User is disabled"
             })
         }
@@ -41,15 +41,18 @@ class LoginController {
                 _id: userExist._id,
                 name: userExist.frist_name,
                 last_name: userExist.last_name,
-                email: userExist.email
+                email: userExist.email,
+                user_type: userExist.user_type,
+                user_status: userExist.user_status
             },
             token: jwt.sign(
                 {
                     _id: userExist._id,
-                    user_type: userExist.user_type,
-                    frist_name: userExist.frist_name,
+                    name: userExist.frist_name,
                     last_name: userExist.last_name,
                     email: userExist.email,
+                    user_type: userExist.user_type,
+                    user_status: userExist.user_status
                 }, 
                 authConfig.secret, 
                 {expiresIn: authConfig.expireIn} 
