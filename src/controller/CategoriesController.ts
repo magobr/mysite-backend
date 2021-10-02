@@ -1,6 +1,5 @@
 import * as express from "express";
 import { CategoriesModel } from "../model/CategoriesModel";
-import { Categories } from "../interface/Categories";
 
 interface Request extends express.Request {
     user?: any
@@ -17,9 +16,8 @@ class CategoriesController{
         }
 
         let { category } = req.body;
-        const categoryInterface = { category }
 
-        CategoriesModel.create(categoryInterface, (err)=>{
+        CategoriesModel.create(category, (err: any)=>{
             if(err) return res.status(400).json({
                 error: true,
                 message: "Error registering Category"
@@ -30,7 +28,25 @@ class CategoriesController{
                 message: "Category registering successfully"
             })
         })
+    }
 
+    async find(req: Request, res: express.Response){
+        
+        let category;
+        if(!req.params.id){
+            category = await CategoriesModel.find({ });
+        } else {
+            category = await CategoriesModel.findById(req.params.id);
+        }
+
+        if(!category){
+            return res.status(200).json({
+            error: true,
+            message: "No Records!"
+            });
+        }
+
+        return res.status(200).json(category);
     }
 }
 
