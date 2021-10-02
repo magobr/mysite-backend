@@ -28,11 +28,16 @@ class NewsController{
             }
         }
         
-        let author = req.user
-        
-        const newsInterface = { author, news }
+        let { _id, frist_name, last_name, email } = req.user
 
-        NewsModel.create(newsInterface, (err)=>{
+        let author = {
+            _id,
+            frist_name,
+            last_name,
+            email
+        }
+        
+        NewsModel.create({ author, news }, (err)=>{
             if(err) return res.status(400).json({
                 error: true,
                 message: "Error registering news"
