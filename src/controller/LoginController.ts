@@ -15,6 +15,7 @@ class LoginController {
         if (!userExist){
             return res.status(400).json({
                 error: true,
+                code: 1,
                 message: "User does not exist"
             })
         }
@@ -22,6 +23,7 @@ class LoginController {
         if (userExist.user_status === UserStatus.Disabled) {
             return res.status(200).json({
                 error: true,
+                code: 2,
                 user_status: userExist.user_status,
                 message: "User is disabled"
             })
@@ -32,6 +34,7 @@ class LoginController {
         if(!passValid){
             return res.status(400).json({
                 error: true,
+                code: 3,
                 message: "The password is invalid"
             })
         }
