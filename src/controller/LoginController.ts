@@ -42,7 +42,7 @@ class LoginController {
         return res.status(200).json({
             user: {
                 _id: userExist._id,
-                name: userExist.frist_name,
+                frist_name: userExist.frist_name,
                 last_name: userExist.last_name,
                 email: userExist.email,
                 user_type: userExist.user_type,
@@ -51,7 +51,7 @@ class LoginController {
             token: jwt.sign(
                 {
                     _id: userExist._id,
-                    name: userExist.frist_name,
+                    frist_name: userExist.frist_name,
                     last_name: userExist.last_name,
                     email: userExist.email,
                     user_type: userExist.user_type,
