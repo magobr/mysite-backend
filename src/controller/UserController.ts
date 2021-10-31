@@ -2,7 +2,6 @@ import * as express from 'express';
 import { UserModel } from "../model/UserModel";
 import * as yup from "yup";
 import * as bcrypt from "bcryptjs";
-import { User } from "../interface/UserInterface";
 import { UserType } from "../enums/UserEnum";
 
 interface Request extends express.Request {

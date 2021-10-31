@@ -1,7 +1,7 @@
 export enum UserType{
-    Writer = "WRITER",
+    Escritor = "WRITER",
     Admin = "ADMIN",
-    Reader = "READER"
+    Leitor = "READER"
 }
 
 export enum UserStatus{
