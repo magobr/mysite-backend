@@ -18,7 +18,7 @@ class Auto{
     }
 
     LevelWriter(req: Request, res: express.Response, next: express.NextFunction){
-        if (req.user.user_type !== UserType.Admin && req.user.user_type !== UserType.Writer){
+        if (req.user.user_type !== UserType.Admin && req.user.user_type !== UserType.Escritor){
             return res.status(203).json({
                 error: true,
                 message: "Not authorized"
@@ -28,7 +28,7 @@ class Auto{
     }
 
     LevelReader(req: Request, res: express.Response, next: express.NextFunction){
-        if(req.user.user_type !== UserType.Admin && req.user.user_type !== UserType.Reader){
+        if(req.user.user_type !== UserType.Admin && req.user.user_type !== UserType.Leitor){
             return res.status(203).json({
                 error: true,
                 message: "Not authorized"
