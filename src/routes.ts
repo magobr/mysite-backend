@@ -29,8 +29,8 @@ route.post("/news/create", AuthMidleware, Autorization.LevelWriter, News.store);
 route.post("/news/categories", AuthMidleware, Autorization.LevelWriter, Categories.store);
 route.get("/news/categories", AuthMidleware, Autorization.LevelWriter, Categories.find);
 route.get("/news/categories/:id", AuthMidleware, Autorization.LevelWriter, Categories.find);
-route.get("/news", AuthMidleware, Autorization.LevelWriter, News.find);
-route.get("/news/:id", AuthMidleware, Autorization.LevelWriter, News.find);
+route.get("/news", News.find);
+route.get("/news/:id", News.find);
 route.delete("/news/:id", AuthMidleware, Autorization.LevelAdmin, News.del);
 route.put("/news/:id", AuthMidleware, Autorization.LevelAdmin, News.update);
 
