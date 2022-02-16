@@ -51,7 +51,7 @@ const storageTypes: storageTypes = {
 
 const multerConfig = {
   dest: path.resolve(__dirname, "..", "..", "tmp", "uploads"),
-  storage: storageTypes[process.env.STORAGE_TYPE],
+  storage: storageTypes["s3"],
   limits: {
     fileSize: MAX_SIZE_TWO_MEGABYTES,
   },
