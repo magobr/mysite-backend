@@ -7,6 +7,9 @@ import { CategoriesController } from "./controller/CategoriesController";
 // Midlewares
 import { AuthMidleware } from "./midlewares/AuthMidleware";
 import { Autorization } from "./midlewares/AutorizationMidleware";
+import multer from "multer";
+import { multerConfig } from "./config/multer"
+import { ImageService } from "./service/ImageService";
 
 const route = Router();
 
@@ -14,6 +17,8 @@ const User = new UserController;
 const News = new NewsController;
 const Login = new LoginController;
 const Categories = new CategoriesController;
+// Service
+const Image = new ImageService;
 
 route.post("/login", Login.login);
 route.get("/logout", Login.logout);
@@ -29,9 +34,11 @@ route.post("/news/create", AuthMidleware, Autorization.LevelWriter, News.store);
 route.post("/news/categories", AuthMidleware, Autorization.LevelWriter, Categories.store);
 route.get("/news/categories", AuthMidleware, Autorization.LevelWriter, Categories.find);
 route.get("/news/categories/:id", AuthMidleware, Autorization.LevelWriter, Categories.find);
-route.get("/news", AuthMidleware, Autorization.LevelWriter, News.find);
-route.get("/news/:id", AuthMidleware, Autorization.LevelWriter, News.find);
+route.get("/news", News.find);
+route.get("/news/:id", News.find);
 route.delete("/news/:id", AuthMidleware, Autorization.LevelAdmin, News.del);
 route.put("/news/:id", AuthMidleware, Autorization.LevelAdmin, News.update);
+// Upload
+route.post("/upload/img", multer(multerConfig).single("file"), Image.store)
 
 export { route }
