@@ -39,6 +39,7 @@ route.get("/news/:id", News.find);
 route.delete("/news/:id", AuthMidleware, Autorization.LevelAdmin, News.del);
 route.put("/news/:id", AuthMidleware, Autorization.LevelAdmin, News.update);
 // Upload
-route.post("/upload/img", multer(multerConfig).single("file"), Image.store)
+route.post("/upload/img", AuthMidleware, Autorization.LevelWriter, multer(multerConfig).single("file"), Image.store)
+route.get("/img/:id", AuthMidleware, Autorization.LevelWriter, Image.find)
 
 export { route }
