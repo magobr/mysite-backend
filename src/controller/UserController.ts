@@ -55,12 +55,17 @@ class UserController {
   async find(req: Request, res: express.Response, next: express.NextFunction){
 
     let users;
-    if (!req.params.id) {
-      users = await UserModel.find({});  
-    } else {
-      users = await UserModel.findById(req.params.id);
+    
+    try{
+      if (!req.params.id) {
+        users = await UserModel.find({});  
+      } else {
+        users = await UserModel.findById(req.params.id);
+      }
+    }catch(_e){
+      users = false;
     }
-
+    
     if(!users){
       return res.status(200).json({
         error: true,
